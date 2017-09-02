@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOG_HOME" value="log"/>
+  <property name="INFO_FILE_NAME" value="info"/>
+  <property name="ERROR_FILE_NAME" value="error"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+      </Pattern>
+
+    </layout>
+  </appender>
+
+  <appender name="FILE_INFO"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_HOME}/${INFO_FILE_NAME}.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+      </Pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>
+        ${LOG_HOME}/archived/${INFO_FILE_NAME}.%d{yyyy-MM-dd}.%i.log
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <appender name="FILE_ERROR"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_HOME}/${ERROR_FILE_NAME}.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+      </Pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>
+        ${LOG_HOME}/archived/${ERROR_FILE_NAME}.%d{yyyy-MM-dd}.%i.log
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <logger name="com.marqusm" level="ALL"/>
+  <logger name="org.hibernate" level="WARN"/>
+  <logger name="org.springframework" level="WARN"/>
+  <logger name="org.apache" level="WARN"/>
+  <logger name="ch.qos.logback" level="WARN"/>
+  <logger name="com.mchange" level="WARN"/>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE_INFO"/>
+    <appender-ref ref="FILE_ERROR"/>
+  </root>
+
+</configuration>

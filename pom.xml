@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.marqusm</groupId>
+  <artifactId>rest-server-template</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1-SNAPSHOT</version>
+
+  <name>Rest Server Template</name>
+  <scm>
+    <connection>git@github.com:marqus-dc/rest-server-template.git</connection>
+    <tag>HEAD</tag>
+    <url>https://github.com/marqus-dc/rest-server-template</url>
+  </scm>
+
+  <properties>
+    <start-class>com.marqusm.Application</start-class>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <jdk.version>1.8</jdk.version>
+    <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
+    <postgres.version>9.4.1212</postgres.version>
+    <hibernate.version>5.2.10.Final</hibernate.version>
+    <junit.version>4.12</junit.version>
+    <logback.version>1.2.3</logback.version>
+    <apache.commons-lang3.version>3.6</apache.commons-lang3.version>
+  </properties>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.6.RELEASE</version>
+  </parent>
+
+  <dependencies>
+
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+
+    <!-- Spring Test -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>${spring-boot.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Postgres -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgres.version}</version>
+    </dependency>
+
+    <!-- Hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- Unit Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
+    <!-- Utils -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${apache.commons-lang3.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <finalName>rest-server-template</finalName>
+
+    <plugins>
+
+      <!-- Set JDK Compiler Level -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <executable>true</executable>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>
