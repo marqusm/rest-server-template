@@ -4,6 +4,7 @@
   <property name="LOG_HOME" value="log"/>
   <property name="INFO_FILE_NAME" value="info"/>
   <property name="ERROR_FILE_NAME" value="error"/>
+  <property name="KEEP_IN_DAYS" value="10"/>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
@@ -26,12 +27,15 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
       <fileNamePattern>
-        ${LOG_HOME}/archived/${INFO_FILE_NAME}.%d{yyyy-MM-dd}.%i.log
+        ${LOG_HOME}/archived/${INFO_FILE_NAME}.%d{yyyy-MM-dd}.%i.log.gz
       </fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
         class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>10MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
+      <!-- keep N days worth of history -->
+      <maxHistory>${KEEP_IN_DAYS}</maxHistory>
+      <cleanHistoryOnStart>true</cleanHistoryOnStart>
     </rollingPolicy>
   </appender>
 
@@ -49,21 +53,24 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
       <fileNamePattern>
-        ${LOG_HOME}/archived/${ERROR_FILE_NAME}.%d{yyyy-MM-dd}.%i.log
+        ${LOG_HOME}/archived/${ERROR_FILE_NAME}.%d{yyyy-MM-dd}.%i.log.gz
       </fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
         class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>10MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
+      <!-- keep N days worth of history -->
+      <maxHistory>${KEEP_IN_DAYS}</maxHistory>
+      <cleanHistoryOnStart>true</cleanHistoryOnStart>
     </rollingPolicy>
   </appender>
 
   <logger name="com.marqusm" level="ALL"/>
-  <logger name="org.hibernate" level="WARN"/>
-  <logger name="org.springframework" level="WARN"/>
-  <logger name="org.apache" level="WARN"/>
-  <logger name="ch.qos.logback" level="WARN"/>
-  <logger name="com.mchange" level="WARN"/>
+  <logger name="org.hibernate" level="INFO"/>
+  <logger name="org.springframework" level="INFO"/>
+  <logger name="org.apache" level="INFO"/>
+  <logger name="ch.qos.logback" level="INFO"/>
+  <logger name="com.mchange" level="INFO"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT"/>
