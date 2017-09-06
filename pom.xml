@@ -89,6 +89,13 @@
       <version>${hibernate.version}</version>
     </dependency>
 
+    <!--Security-->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.7.0</version>
+    </dependency>
+
     <!-- Unit Test -->
     <dependency>
       <groupId>junit</groupId>

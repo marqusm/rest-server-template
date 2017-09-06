@@ -2,11 +2,14 @@ package com.marqusm.service;
 
 import com.marqusm.exception.NotFoundException;
 import com.marqusm.model.dto.StudentDto;
+import com.marqusm.model.request.StudentRequest;
 import com.marqusm.model.response.StudentResponse;
 import com.marqusm.repository.StudentRepository;
 import com.marqusm.util.Checker;
 import com.marqusm.util.Transformer;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,15 +33,22 @@ public class StudentService {
     this.transformer = transformer;
   }
 
+  public void saveStudent(StudentRequest studentRequest) throws NotFoundException {
+    StudentDto studentDto = studentRequest.export();
+    studentDto.setCreationMetadata(true, LocalDateTime.now(), 1L);
+    studentRepository.save(studentDto);
+  }
+
   public StudentResponse getOneStudent(Long id) throws NotFoundException {
     StudentDto studentDto = studentRepository.findOne(id);
     Checker.checkNotNull(studentDto);
-    return transformer.transform(StudentResponse.class, studentDto);
+    return new StudentResponse(studentDto);
   }
 
   public List<StudentResponse> getAllStudents() throws NotFoundException {
     List<StudentDto> studentDtos = studentRepository.findAll();
-//    Checker.checkNotNull(studentDto);
-    return transformer.transform(StudentResponse.class, studentDtos);
+    return studentDtos.stream()
+        .map(studentDto -> new StudentResponse(studentDto))
+        .collect(Collectors.toList());
   }
 }
