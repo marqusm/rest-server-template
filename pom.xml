@@ -29,6 +29,7 @@
     <junit.version>4.12</junit.version>
     <logback.version>1.2.3</logback.version>
     <apache.commons-lang3.version>3.6</apache.commons-lang3.version>
+    <google.guava.version>23.0</google.guava.version>
   </properties>
 
   <parent>
@@ -115,6 +116,11 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${apache.commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${google.guava.version}</version>
     </dependency>
 
   </dependencies>

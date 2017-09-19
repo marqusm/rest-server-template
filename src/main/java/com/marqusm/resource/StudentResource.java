@@ -1,5 +1,6 @@
 package com.marqusm.resource;
 
+import com.marqusm.enumeration.ApiEndpoint;
 import com.marqusm.exception.NotFoundException;
 import com.marqusm.model.request.StudentRequest;
 import com.marqusm.model.response.StudentResponse;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @createdOn : 29-Aug-17
  */
 @RestController
-@RequestMapping("students")
+@RequestMapping(ApiEndpoint.STUDENTS)
 public class StudentResource extends ErrorHandlingResource {
 
   private final StudentService studentService;
