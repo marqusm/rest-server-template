@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author : Marko Mišković
  * @createdOn : 02-Sep-17
  */
-public class BaseRepository {
+abstract public class ErrorHandlingResource {
 
-  private final static Logger logger = LoggerFactory.getLogger(BaseRepository.class);
+  private final static Logger logger = LoggerFactory.getLogger(ErrorHandlingResource.class);
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NotFoundException.class)

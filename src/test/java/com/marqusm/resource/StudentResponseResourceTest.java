@@ -24,7 +24,7 @@ import org.springframework.http.HttpStatus;
 public class StudentResponseResourceTest extends SpringTest {
 
   @Autowired
-  private StudentResource studentResource;
+  private ErrorHandlingResource studentResource;
   @Autowired
   private StudentRepository studentRepository;
   @Autowired

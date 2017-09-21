@@ -67,7 +67,7 @@
 
   <logger name="com.marqusm" level="ALL"/>
   <logger name="org.hibernate" level="INFO"/>
-  <logger name="org.springframework" level="INFO"/>
+  <logger name="org.springframework" level="ALL"/>
   <logger name="org.apache" level="INFO"/>
   <logger name="ch.qos.logback" level="INFO"/>
   <logger name="com.mchange" level="INFO"/>
