@@ -13,8 +13,7 @@ public class Token {
   private LocalDateTime expiredDate;
   private LocalDateTime createdDate;
   private LocalDateTime lastUsedDate;
-  private String id;
-  private String token;
+  private String value;
   private StudentDto studentDto;
 
   public Token() {
@@ -44,19 +43,19 @@ public class Token {
     this.lastUsedDate = lastUsedDate;
   }
 
-  public String getId() {
-    return id;
+  public String getValue() {
+    return value;
   }
 
-  public void setId(String key) {
-    this.id = key;
+  public void setValue(String value) {
+    this.value = value;
   }
 
-  public String getToken() {
-    return token;
+  public StudentDto getStudentDto() {
+    return studentDto;
   }
 
-  public void setToken(String token) {
-    this.token = token;
+  public void setStudentDto(StudentDto studentDto) {
+    this.studentDto = studentDto;
   }
 }

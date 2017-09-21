@@ -8,5 +8,7 @@ package com.marqusm.enumeration;
  */
 public class ApiEndpoint {
   public final static String LOGIN = "sign-in";
+  public final static String LOGOUT = "sign-out";
   public final static String STUDENTS = "students";
+  public final static String MARKS = "marks";
 }

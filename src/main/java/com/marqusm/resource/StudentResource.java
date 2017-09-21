@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(ApiEndpoint.STUDENTS)
-public class StudentResource extends ErrorHandlingResource {
+public class StudentResource extends BaseResource {
 
   private final StudentService studentService;
 
@@ -39,8 +39,7 @@ public class StudentResource extends ErrorHandlingResource {
    */
   @Secured("ROLE_STUDENT")
   @PostMapping
-  public void saveStudent(@RequestBody StudentRequest studentRequest)
-      throws NotFoundException {
+  public void saveStudent(@RequestBody StudentRequest studentRequest) throws NotFoundException {
     studentService.saveStudent(studentRequest);
   }
 
@@ -51,8 +50,7 @@ public class StudentResource extends ErrorHandlingResource {
    */
   @Secured("ROLE_STUDENT")
   @GetMapping("{studentId}")
-  public StudentResponse getOneStudent(@PathVariable("studentId") Long studentId)
-      throws NotFoundException {
+  public StudentResponse getOneStudent(@PathVariable("studentId") Long studentId) throws NotFoundException {
     return studentService.getOneStudent(studentId);
   }
 

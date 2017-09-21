@@ -1,5 +1,6 @@
 package com.marqusm.service;
 
+import com.marqusm.model.dto.StudentDto;
 import com.marqusm.model.security.Token;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -23,14 +24,19 @@ public class TokenService {
     this.tokenMap = new HashMap<>();
   }
 
-  public Token getTokenByKey(String tokenKey) {
-    return tokenMap.get(tokenKey);
-  }
-
   public Token getTokenByValue(String tokenValue) {
     for (Token token : tokenMap.values()) {
-      if (token.getToken().equals(tokenValue)) {
+      if (token.getValue().equals(tokenValue)) {
         return token;
+      }
+    }
+    return null;
+  }
+
+  public StudentDto getUserByTokenValue(String tokenValue) {
+    for (Token token : tokenMap.values()) {
+      if (token.getValue().equals(tokenValue)) {
+        return token.getStudentDto();
       }
     }
     return null;
@@ -41,33 +47,29 @@ public class TokenService {
   }
 
   public void addToken(Token token) {
-    tokenMap.put(token.getId(), token);
+    tokenMap.put(token.getValue(), token);
   }
 
-  public Token generateToken(LocalDateTime expiredDate) {
+  public Token generateToken(LocalDateTime expiredDate, StudentDto studentDto) {
     Token token = new Token();
     token.setExpiredDate(expiredDate);
     token.setCreatedDate(LocalDateTime.now());
-    token.setId(UUID.randomUUID().toString());
-    token.setToken(UUID.randomUUID().toString());
+    token.setValue(UUID.randomUUID().toString());
+    token.setStudentDto(studentDto);
     return token;
   }
 
   public void updateLastLoginByCurrentDate(Token token) {
     token.setLastUsedDate(LocalDateTime.now());
-    tokenMap.put(token.getId(), token);
+    tokenMap.put(token.getValue(), token);
   }
 
   public void updateToken(Token token) {
-    tokenMap.put(token.getId(), token);
+    tokenMap.put(token.getValue(), token);
   }
 
-  public void deleteToken(Integer tokenId) {
-    tokenMap.remove(tokenId);
-  }
-
-  public Token getTokenById(Integer tokenId) {
-    return tokenMap.get(tokenId);
+  public void deleteToken(Integer tokenValue) {
+    tokenMap.remove(tokenValue);
   }
 
 }
