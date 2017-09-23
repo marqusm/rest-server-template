@@ -35,7 +35,7 @@ public class StudentResource extends BaseResource {
   /**
    * Save student
    *
-   * @return {@link StudentResponse} student
+   * @param studentRequest {@link StudentRequest} Student data to be saved
    */
   @Secured("ROLE_STUDENT")
   @PostMapping

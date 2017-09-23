@@ -6,7 +6,6 @@ import com.marqusm.model.request.StudentRequest;
 import com.marqusm.model.response.StudentResponse;
 import com.marqusm.repository.StudentRepository;
 import com.marqusm.util.Checker;
-import com.marqusm.util.Transformer;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
 
   private final StudentRepository studentRepository;
-  private final Transformer transformer;
 
   @Autowired
-  public StudentService(StudentRepository studentRepository, Transformer transformer) {
+  public StudentService(StudentRepository studentRepository) {
     this.studentRepository = studentRepository;
-    this.transformer = transformer;
   }
 
   public void saveStudent(StudentRequest studentRequest) throws NotFoundException {
@@ -48,7 +45,7 @@ public class StudentService {
   public List<StudentResponse> getAllStudents() throws NotFoundException {
     List<StudentDto> studentDtos = studentRepository.findAll();
     return studentDtos.stream()
-        .map(studentDto -> new StudentResponse(studentDto))
+        .map(StudentResponse::new)
         .collect(Collectors.toList());
   }
 }
