@@ -1,0 +1,7 @@
+site_name: 'rest-server-template'
+
+nav:
+  - Home: README.md
+
+plugins:
+  - techdocs-core
